@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "141287460311",
+    "firebase_url": "https://rafadana-project.firebaseio.com",
+    "project_id": "rafadana-project",
+    "storage_bucket": "rafadana-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:141287460311:android:c2f6c4ad926a3aa1ee8f92",
+        "android_client_info": {
+          "package_name": "com.rafadana.authentication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "141287460311-rr5s7tuomubo0qhktneddrmmof47ble9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3XKJ0xP5mN6N8n4tq8jFuZ-x6dXRVUuU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "141287460311-rr5s7tuomubo0qhktneddrmmof47ble9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

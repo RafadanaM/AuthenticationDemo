@@ -1,3 +1,4 @@
+import 'package:authentication/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:authentication/widgets/custom_text_form_field.dart';
@@ -13,6 +14,7 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  AuthService _authService = AuthService();
   bool _autoValidate = false;
   bool _showSpinner = false;
   String _email;
@@ -62,12 +64,29 @@ class _RegisterState extends State<Register> {
               ShadowButton(
                 title: 'Register',
                 color: Colors.blueAccent,
-                onPressed: () {},
+                onPressed: () {
+                  _validateRegister();
+                },
               ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  void _validateRegister() async {
+    final FormState form = _formKey.currentState;
+    if (_formKey.currentState.validate()) {
+      form.save();
+
+      final user =
+          await _authService.createUserWithEmailAndPassword(_email, _password);
+      print(user);
+    } else {
+      setState(() {
+        _autoValidate = true;
+      });
+    }
   }
 }

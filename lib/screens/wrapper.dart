@@ -1,6 +1,5 @@
 import 'package:authentication/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
-
 class Wrapper extends StatelessWidget {
   static const String routeName = '/';
 

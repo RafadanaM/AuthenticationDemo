@@ -1,3 +1,4 @@
+import 'package:authentication/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:authentication/services/validator.dart';
@@ -65,12 +66,61 @@ class _LoginState extends State<Login> {
               ShadowButton(
                 title: 'Log In',
                 color: Colors.lightBlueAccent,
-                onPressed: () {},
+                onPressed: () {
+                  _validateLogin();
+                },
               ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  void _validateLogin() async {
+    final FormState form = _formKey.currentState;
+
+    if (_formKey.currentState.validate()) {
+      form.save();
+      setState(() {
+        _showSpinner = true;
+      });
+
+      final user = await Provider.of<AuthService>(context)
+          .signInWithEmailAndPassword(_email, _password);
+
+      if (user is String) {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                elevation: 5.0,
+                title: Text('Login Error'),
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),
+                content: Container(
+                  child: Text(user),
+                ),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text('OK'),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              );
+            });
+      } else if (user != null) {
+        Navigator.pop(context);
+      }
+      setState(() {
+        _showSpinner = false;
+      });
+    } else {
+      setState(() {
+        _autoValidate = true;
+      });
+    }
   }
 }

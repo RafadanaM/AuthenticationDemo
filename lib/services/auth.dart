@@ -51,35 +51,40 @@ class AuthService {
       _userFromFirebaseUser(user);
     } catch (e) {
       switch (e.code) {
-        case 'ERROR_INVALID_EMAIL': {
-          return 'Email address is malformed.';
-        }
-        break;
+        case 'ERROR_INVALID_EMAIL':
+          {
+            return 'Email address is malformed.';
+          }
+          break;
 
-        case 'ERROR_WRONG_PASSWORD': {
-          return 'Wrong password.';
-        }
-        break;
+        case 'ERROR_WRONG_PASSWORD':
+          {
+            return 'Wrong password.';
+          }
+          break;
 
-        case 'ERROR_USER_NOT_FOUND': {
-          return 'User not found.';
-        }
-        break;
+        case 'ERROR_USER_NOT_FOUND':
+          {
+            return 'User not found.';
+          }
+          break;
 
-        case 'ERROR_USER_DISABLED' : {
-          return 'This user has been disabled.';
-        }
-        break;
+        case 'ERROR_USER_DISABLED':
+          {
+            return 'This user has been disabled.';
+          }
+          break;
 
-        case 'ERROR_TOO_MANY_REQUESTS': {
-          return 'Too many sign in attempts.';
-        }
-        break;
+        case 'ERROR_TOO_MANY_REQUESTS':
+          {
+            return 'Too many sign in attempts.';
+          }
+          break;
 
-        case 'ERROR_OPERATION_NOT_ALLOWED': {
-          return 'Email & password accounts are disabled.';
-        }
-
+        case 'ERROR_OPERATION_NOT_ALLOWED':
+          {
+            return 'Email & password accounts are disabled.';
+          }
       }
     }
   }

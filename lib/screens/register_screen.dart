@@ -1,9 +1,11 @@
-import 'package:authentication/services/auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:authentication/widgets/custom_text_form_field.dart';
 import 'package:authentication/widgets/shadow_button.dart';
 import 'package:authentication/services/validator.dart';
+import 'package:provider/provider.dart';
+import 'package:authentication/services/auth.dart';
 
 class Register extends StatefulWidget {
   static const String routeName = '/registration';
@@ -14,7 +16,6 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  AuthService _authService = AuthService();
   bool _autoValidate = false;
   bool _showSpinner = false;
   String _email;
@@ -79,10 +80,39 @@ class _RegisterState extends State<Register> {
     final FormState form = _formKey.currentState;
     if (_formKey.currentState.validate()) {
       form.save();
-
-      final user =
-          await _authService.createUserWithEmailAndPassword(_email, _password);
+      setState(() {
+        _showSpinner = true;
+      });
+      final user = await Provider.of<AuthService>(context).createUserWithEmailAndPassword(_email, _password);
+      if (user is String) {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                elevation: 5.0,
+                title: Text('Registration Error'),
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),
+                content: Container(
+                  child: Text(user),
+                ),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text('OK'),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              );
+            });
+      } else if (user != null) {
+        Navigator.pop(context);
+      }
       print(user);
+      setState(() {
+        _showSpinner = false;
+      });
     } else {
       setState(() {
         _autoValidate = true;

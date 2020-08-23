@@ -3,6 +3,7 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:authentication/services/validator.dart';
 import 'package:authentication/widgets/custom_text_form_field.dart';
 import 'package:authentication/widgets/shadow_button.dart';
+import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
   static const String routeName = '/login';

@@ -48,7 +48,7 @@ class AuthService {
       AuthResult result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
-      _userFromFirebaseUser(user);
+      return _userFromFirebaseUser(user);
     } catch (e) {
       switch (e.code) {
         case 'ERROR_INVALID_EMAIL':

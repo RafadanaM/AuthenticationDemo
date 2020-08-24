@@ -15,7 +15,6 @@ class Wrapper extends StatelessWidget {
       builder: (context, AsyncSnapshot<User> snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           final bool signedIn = snapshot.hasData;
-          print(snapshot.data);
           return signedIn
               ? Home()
               : Welcome();

@@ -82,7 +82,7 @@ class _RegisterState extends State<Register> {
       setState(() {
         _showSpinner = true;
       });
-      final user = await Provider.of<AuthService>(context)
+      final user = await Provider.of<AuthService>(context, listen: false)
           .createUserWithEmailAndPassword(_email, _password);
       if (user is String) {
         showDialog(

@@ -86,7 +86,7 @@ class _LoginState extends State<Login> {
         _showSpinner = true;
       });
 
-      final user = await Provider.of<AuthService>(context)
+      final user = await Provider.of<AuthService>(context, listen: false)
           .signInWithEmailAndPassword(_email, _password);
 
       if (user is String) {

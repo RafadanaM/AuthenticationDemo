@@ -1,10 +1,9 @@
 import 'package:authentication/services/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatelessWidget {
   static const String routeName = '/home';
-
-  final AuthService _authService = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +15,7 @@ class Home extends StatelessWidget {
         actions: <Widget>[
           FlatButton.icon(
             onPressed: () async {
-              await _authService.signOut();
+              await Provider.of<AuthService>(context, listen: false).signOut();
             },
             icon: Icon(Icons.person),
             label: Text('Logout'),
